@@ -1,4 +1,4 @@
-# mikrotik-telegram
+# mikrotik-telegram v6.0
 Mikrotik script to send telegram message. Save message if sending failed. Resend saved message on interval.
 - send telegram message (eTGSend)
 - save message if the send fails (eTGSave)
@@ -8,25 +8,28 @@ Saved Data Location:
 - /system scripts source
 
 Resend Saved:
-- interval = 5mins
+- interval = 5mins (change accordingly)
 - if [empty] saved message, disable handler
 
 Parameters:
-- tBot="xxxxx" ( Bot API Token )
-- tGrp="xxxxx" ( Group Chat ID )
-- tMsg "xxxxx" ( telegram message )
+- Bot = "xxxxx" ( Bot API Token )
+- Grp = "xxxxx" ( Group Chat ID )
+- Msg = "xxxxx" ( telegram message )
 
 Sample Send Message:
 
-	{
-	:local eTGSend [:parse [/system script get sc-eTGSend source]]
-	$eTGSend tBot=$tBot tGrp=$tGrp $tMsg
-	}
+{
+:local TGBot "xxxxx";
+:local TGGrp "xxxxx";
+:local TGMsg "Test1";
+:local eTGSend [:parse [/system script get sc-eTGSend source]];
+$eTGSend tBot=$TGBot tGrp=$TGGrp $TGMsg;
+}
 
-Howto Install:
-- open as txt file
-- select all & copy
-- paste to winbox terminal
+How to install:
+- Open "telegram_msg_send_with_save.rsc".
+- Select all then copy.
+- Paste to winbox terminal.
 
 Author:
 - Chloe Renae & Edmar Lozada
@@ -37,4 +40,3 @@ Facebook Contact:
 
 Facebook JuanFi Group:
 - https://www.facebook.com/groups/1172413279934139
-

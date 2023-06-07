@@ -21,11 +21,13 @@
 #  - open as txt file
 #  - select all, copy
 #  - paste to winbox terminal
-# Author:
+# by:
 #  - Chloe Renae & Edmar Lozada
 #  - Gcash (0909-3887889)
 # Facebook Contact:
 #  - https://www.facebook.com/chloe.renae.9
+# Facebook JuanFi Group:
+#  - https://www.facebook.com/groups/1172413279934139
 # ------------------------------#\r
 # send telegram message example:
 # {
@@ -42,7 +44,7 @@
   :local eSource "# $eName #\r
 # ------------------------------\r
 # Send Telegram Message API\r
-# Author: Chloe Renae & Edmar Lozada\r
+# by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :local tMsg \$1; :local gTGResult;
 :local iURL (\"https://api.telegram.org\".\"/bot\$tBot/sendmessage\\?chat_id=\$tGrp&text=\$tMsg\");
@@ -72,7 +74,7 @@
   :local eSource "# $eName #\r
 # ------------------------------\r
 # Save Telegram Message for Telegram_Handler\r
-# Author: Chloe Renae & Edmar Lozada\r
+# by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :local eRand do={:local i [/system resource irq get 0 count];:return ([pick \$i ([:len \$i]-2) [:len \$i]])};
 :local iDate do={:local d [/system clock get date];:local cD [:pic \$d 4 6];:local cY [:pick \$d 7 11];
@@ -108,7 +110,7 @@
   :local eSource "# $eName #\r
 # ------------------------------\r
 # Remove all Saved Telegram Messages\r
-# Author: Chloe Renae & Edmar Lozada\r
+# by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :foreach nRec in=[/system script find owner=\"telegram savedata\"] do={ /system script remove \$nRec };
 # ------------------------------\r\n"
@@ -122,7 +124,7 @@
   :local eSource "# $eName #\r
 # ------------------------------\r
 # Send Telegram Message\r
-# Author: Chloe Renae & Edmar Lozada\r
+# by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :local tMsg \$1; :local iCtr 3;
 :if (([:len \$tBot]=0) || ([:len \$tGrp]=0) || ([:len \$tMsg]=0)) do={
@@ -150,7 +152,7 @@
   :local sEvent "# $eName #\r
 # ------------------------------\r
 # Saved Message Telegram Handler\r
-# Author: Chloe Renae & Edmar Lozada\r
+# by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :if ([/system script find owner=\"telegram savedata\"]!=\"\") do={
   :local gTGList [:toarray \"\"];

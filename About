@@ -1,0 +1,23 @@
+mikrotik-telegram v6.0
+Mikrotik script to send telegram message. Save message if the send fails. Resend saved message on interval.
+- send telegram message (eTGSend)
+- save message if the send fails (eTGSave)
+- resend saved message (eTGHandler)
+
+Sample Send Message:
+{
+:local TGBot "xxxxx";
+:local TGGrp "xxxxx";
+:local TGMsg "Test1";
+:local eTGSend [:parse [/system script get sc-eTGSend source]];
+$eTGSend tBot=$TGBot tGrp=$TGGrp $TGMsg;
+}
+
+dawlim here:
+https://github.com/edmarlozada/mikrotik-telegram
+
+Write us comment if error occurs,
+or if script is working well!
+
+mikrotik, mikrotik-script, mikrotik-routeros-script
+telegram, telegram-api, telegram-group
