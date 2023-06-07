@@ -1,4 +1,4 @@
-mikrotik-telegram v6.0
+mikrotik-telegram v6.1
 Mikrotik script to send telegram message. Save message if the send fails. Resend saved message on interval.
 - send telegram message (eTGSend)
 - save message if the send fails (eTGSave)
