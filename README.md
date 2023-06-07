@@ -18,13 +18,13 @@ Parameters:
 
 Sample Send Message:
 
-{
-:local TGBot "xxxxx";
-:local TGGrp "xxxxx";
-:local TGMsg "Test1";
-:local eTGSend [:parse [/system script get sc-eTGSend source]];
-$eTGSend tBot=$TGBot tGrp=$TGGrp $TGMsg;
-}
+    {
+    :local TGBot "xxxxx";
+    :local TGGrp "xxxxx";
+    :local TGMsg "Test1";
+    :local eTGSend [:parse [/system script get sc-eTGSend source]];
+    $eTGSend tBot=$TGBot tGrp=$TGGrp $TGMsg;
+    }
 
 How to install:
 - Open "telegram_msg_send_with_save.rsc".
