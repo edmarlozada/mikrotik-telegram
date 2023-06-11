@@ -1,10 +1,16 @@
-# ------------------------------#
+# ==============================
+# mikrotik-telegram v6.2
 # Mikrotik script to send telegram message.
 # Save message if the send fails.
 # Resend saved message on interval.
 #  - send telegram message (eTGSend)
 #  - save message if the send fails (eTGSave)
 #  - resend saved message (eTGHandler)
+# Author:
+# - Chloe Renae & Edmar Lozada
+# - Gcash (0909-3887889)
+# Facebook Contact:
+# - https://www.facebook.com/chloe.renae.9
 # Saved Data Location:
 #  - /system script source
 # Sending Saved:
@@ -21,14 +27,7 @@
 #  - open as txt file
 #  - select all, copy
 #  - paste to winbox terminal
-# by:
-#  - Chloe Renae & Edmar Lozada
-#  - Gcash (0909-3887889)
-# Facebook Contact:
-#  - https://www.facebook.com/chloe.renae.9
-# Facebook JuanFi Group:
-#  - https://www.facebook.com/groups/1172413279934139
-# ------------------------------#\r
+# ------------------------------
 # send telegram message example:
 # {
 #  :local tBot "xxxxx" ( Bot API Token );
@@ -36,14 +35,15 @@
 #  :local eTGSend [:parse [/system script get sc-eTGSend source]];
 #  $eTGSend tBot=$tBot tGrp=$tGrp "R : v12345 (123456) 999.00";
 # }
-# ------------------------------#
-
+# ------------------------------
+/{:local iVer v6.2;
+:put "(telegram $iVer) Installing...";
 
 # === sc-eTGSendAPI === #
 { :local eName "eTGSendAPI"
   :local eSource "# $eName #\r
 # ------------------------------\r
-# Send Telegram Message API\r
+# Send Telegram Message API $iVer\r
 # by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :local tMsg \$1; :local gTGResult;
@@ -73,10 +73,10 @@
 { :local eName "eTGSave"
   :local eSource "# $eName #\r
 # ------------------------------\r
-# Save Telegram Message for Telegram_Handler\r
+# Save Telegram Message $iVer\r
 # by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
-:local eRand do={:local i [/system resource irq get 0 count];:return ([pick \$i ([:len \$i]-2) [:len \$i]])};
+:local eRand do={:local n [/system resource irq get 0 count];:return ([pick \$n ([:len \$n]-2) [:len \$n]])};
 :local iDate do={:local d [/system clock get date];:local cD [:pic \$d 4 6];:local cY [:pick \$d 7 11];
   :local cM [pick (100+([find \"..anebarprayunulugepctovec\" [:pick [:pick \$d 0 3] 1 3]]/2)) 1 3];:return \"\$cY\$cM\$cD\"};
 :local iTime do={:local t [/system clock get time];:local r \"\";
@@ -93,8 +93,8 @@
               \"  \\\"tMsg\\\"=\\\"\$tMsg\\\" \\r\\n\".\\
               \"}; :return \\\$tData\\r\\n\");
 /system script add name=\$tName source=\$tSave owner=\"telegram savedata\" comment=\"telegram_savedata: \$tGrp\";
-:local i 5; :while ((\$i > 0) and ([/system script find name=\$tName]=\"\")) do={ :set i (\$i-1); :delay 1s };
-:if (\$i=0) do={
+:local n 5;:while ((\$n>0) and ([/system script find name=\$tName]=\"\")) do={:set n (\$n-1);:delay 1s};
+:if (\$n=0) do={
   :log warning \"($eName) error: /system-script NOT saved => name:[\$tName]\";
 } else={
   /system scheduler set [find name=eTGHandler] disabled=no;
@@ -109,7 +109,7 @@
 { :local eName "eTGRemoveAll"
   :local eSource "# $eName #\r
 # ------------------------------\r
-# Remove all Saved Telegram Messages\r
+# Remove all Telegram Messages $iVer\r
 # by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :foreach nRec in=[/system script find owner=\"telegram savedata\"] do={ /system script remove \$nRec };
@@ -123,7 +123,7 @@
 { :local eName "eTGSend"
   :local eSource "# $eName #\r
 # ------------------------------\r
-# Send Telegram Message\r
+# Send Telegram Message $iVer\r
 # by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :local tMsg \$1; :local iCtr 3;
@@ -143,7 +143,7 @@
 };\r
 # ------------------------------\r\n"
 :if ([/system script find name="sc-$eName"]="") do={ /system script add name="sc-$eName" }
-/system script set [find name="sc-$eName"] source=$eSource owner="telegram function" comment="telegram_function-03: $eName"
+/system script set [find name="sc-$eName"] source=$eSource owner="telegram function" comment="telegram_function-04: $eName"
 }
 
 
@@ -151,7 +151,7 @@
 { :local eName "eTGHandler"
   :local sEvent "# $eName #\r
 # ------------------------------\r
-# Saved Message Telegram Handler\r
+# Telegram Handler $iVer\r
 # by: Chloe Renae & Edmar Lozada\r
 # ------------------------------\r
 :if ([/system script find owner=\"telegram savedata\"]!=\"\") do={
@@ -186,3 +186,4 @@
 }
 
 # ------------------------------
+}
